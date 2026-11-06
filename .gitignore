@@ -8,7 +8,9 @@ __pycache__/
 .ruff_cache/
 
 # Datos crudos e intermedios (reproducibles con src/download.py)
-**/data/raw/
+# Nota: `data/raw/**` ignora el contenido pero no la carpeta, para que cada
+# proyecto pueda re-incluir sus originales con `!data/raw/**` en su .gitignore.
+**/data/raw/**
 **/data/interim/
 *.zip
 *.gz

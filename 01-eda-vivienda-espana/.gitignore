@@ -1,0 +1,33 @@
+# Datos originales: SÍ se versionan
+# (el .gitignore del repo padre ignora `data/raw/**` por defecto; aquí se revierte)
+!data/raw/**
+
+# Datos intermedios: derivados y reproducibles
+data/interim/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+
+# Logs y temporales
+*.log
