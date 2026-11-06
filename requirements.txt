@@ -4,5 +4,6 @@ matplotlib
 seaborn
 geopandas
 openpyxl
+xlrd
 requests
 jupyter
