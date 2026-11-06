@@ -19,12 +19,12 @@ from pathlib import Path
 import pandas as pd
 
 from src.config import (
+    ALL_TERRITORY_CODES,
     INTERIM_DIR,
     MITMA_FILES,
     PARTIAL_YEAR_QUARTERS,
-    PROVINCE_CODES,
     QUARTERS_PER_YEAR,
-    resolve_province,
+    resolve_territory,
 )
 
 OUTPUT_PATH = INTERIM_DIR / "mitma_long.csv"
@@ -144,7 +144,7 @@ def parse_sheet(
         if not isinstance(label, str) or not label.strip():
             continue
 
-        code = resolve_province(label, "mitma")
+        code = resolve_territory(label, "mitma")
         if code is None:
             continue
 
@@ -186,8 +186,8 @@ def validate(df: pd.DataFrame) -> None:
     if df.empty:
         raise ValueError("La tabla está vacía")
 
-    # 1. Las 52 provincias en cada kind
-    expected = set(PROVINCE_CODES)
+    # 1. Las 52 provincias y el total nacional en cada kind
+    expected = set(ALL_TERRITORY_CODES)
     for kind, group in df.groupby("kind"):
         codes = set(group["province_code"])
         if codes != expected:
@@ -267,7 +267,7 @@ def main() -> None:
     for kind, group in df.groupby("kind"):
         print(
             f"  {kind:6s} {len(group):5d} filas · "
-            f"{group['province_code'].nunique()} provincias · "
+            f"{group['province_code'].nunique()} territorios · "
             f"{group['price_eur_m2'].isna().sum()} nulos · "
             f"{group['year'].min()}-{group['year'].max()}"
         )
