@@ -52,16 +52,21 @@ Páginas y endpoints de descarga:
 - Formato "informe": cabecera en las primeras filas, territorios en columnas
   y años/trimestres en filas, o al revés según la tabla. No usar `header=0`.
 - **ADRH**: 82 bloques = 1 nacional + 19 CCAA/ciudades + 52 provincias + 10 islas.
-  Excluir las islas y las filas duplicadas de CCAA uniprovinciales.
-- **IPV**: solo contiene el índice `General`.
+  Excluir las islas y las filas duplicadas de CCAA uniprovinciales. Los bloques
+  se resuelven **por posición**: `Balears, Illes`, `Cantabria`, `Rioja, La`,
+  `Ceuta` y `Melilla` aparecen dos veces con el mismo nombre (CCAA y provincia).
+- **IPV**: solo contiene el índice `General`, para Nacional y 19 CCAA; no hay
+  provincias.
+- **Código `00`**: convención propia para la serie de España (Total
+  Nacional/Nacional). No es un código INE y no debe mezclarse con provincias.
 
 ## Incidencias conocidas
 
 | Incidencia | Detalle |
 |---|---|
 | 2026 parcial | MITMA con Q1–Q2; IPV hasta 2026T2. Excluir de medias anuales y YoY. |
-| `n.r` en MITMA | Total: 17 celdas · Nueva: 162 · Usada: 3. Teruel, Huesca, Ceuta, Melilla, Ávila. |
-| Huecos ADRH | Navarra 2015–2020, Álava 2015–2019, Total Nacional 2015–2020. Son de la fuente. |
+| `n.r` y vacíos en MITMA | Total: 89 celdas (17 `n.r` + 72 vacías), 1995–2013 · Nueva: 355, 2010–2026 · Usada: 3 (Ceuta y Melilla, 2013). Se conservan como fila con valor nulo. |
+| Huecos ADRH | Navarra 2015–2020, Álava 2015–2019, Total Nacional 2015–2020 y Gipuzkoa 2015 (marcado `..`). Son de la fuente. |
 | Sin IPC 2026 | La media anual de 2026 no existe hasta enero de 2027. |
 | Nombres distintos | `Coruña (A)` ≠ `Coruña, A`; `Rioja (La)` ≠ `Rioja, La`; `Madrid (Comunidad de)` ≠ `Madrid, Comunidad de`; `Comunidad Valenciana` ≠ `Comunitat Valenciana`. Mapear por código INE. |
 | Agregado Ceuta y Melilla | Existe en MITMA, no en ADRH. No usar como provincia. |

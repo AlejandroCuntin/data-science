@@ -24,7 +24,7 @@ cada carpeta del portfolio (`02`, `03`, ...) tendrá el suyo.
 - 2026 es parcial (solo Q1–Q2): excluir de medias anuales y variaciones
   interanuales, y marcarlo en las gráficas.
 - No interpolar los huecos de renta (Navarra 2015–2020, Álava 2015–2019,
-  Total Nacional 2015–2020). Se declaran, no se rellenan.
+  Total Nacional 2015–2020, Gipuzkoa 2015). Se declaran, no se rellenan.
 - El valor tasado no es precio de transacción: no presentarlo como tal.
 
 ## Convenciones
