@@ -4,6 +4,7 @@
 
 # Datos intermedios: derivados y reproducibles
 data/interim/
+CONCEPTOS.md
 
 # Python
 __pycache__/
