@@ -11,13 +11,16 @@ No agrega ni deflacta: eso es trabajo de build_panel.py.
 
 from __future__ import annotations
 
-import math
-import re
-from numbers import Real
-from pathlib import Path
+import math #Sirve para representar valores ausentes (que no existen)
+import re #Sirve para buscar patrones de texto como detectar el año y los trimestres en Excel
+from numbers import Real #Sirve para identificar numeros, aqui comprobamos si una celta contiene un número
+from pathlib import Path  #Sirve para localizar los Excels y guardar el CSV
 
-import pandas as pd
+#Pandas es una de las bibliotecas más importantes de Data Science.Permite trabajar con datos estructurados, 
+#como si fueran tablas de Excel, pero desde Python
+import pandas as pd #trabajamos con las tablas de datos
 
+#Importamos apartir de nuestar configuracion base 
 from src.config import (
     ALL_TERRITORY_CODES,
     INTERIM_DIR,
@@ -27,39 +30,65 @@ from src.config import (
     resolve_territory,
 )
 
+#Guardamos la ruta donde queremos guardar el archivo final en una constante
+#INTERIM_DIR es la ruta hasta el directorio raw/interim
+
 OUTPUT_PATH = INTERIM_DIR / "mitma_long.csv"
 
+#Definimos tambien la constante columns con las variables que guardaremos, es una lista
+#Cada elemento de la lista corresponde a la cabecera de una de las columnas
 COLUMNS = ["kind", "province_code", "year", "quarter", "price_eur_m2"]
 
-# Anclas para localizar la estructura dentro de cada hoja
-LABEL_ANCHOR = "TOTAL NACIONAL"
-YEAR_PATTERN = re.compile(r"Año\s+(\d{4})")
-QUARTER_PATTERN = re.compile(r"^([1-4])º$")
+# Pistas para localizar los elementos del Excel
+# "re.compile()" prepara un patrón de búsqueda para poder reutilizarlo
+LABEL_ANCHOR = "TOTAL NACIONAL" #Buscamos el texto TOTAL NACIONAL
+YEAR_PATTERN = re.compile(r"Año\s+(\d{4})") #Buscamos la palabra año + un numero de 4 letras
+QUARTER_PATTERN = re.compile(r"^([1-4])º$") #Buscamos textos como 1, 2, 3, 4
+
+
+#Aqui estableceremos limites para detectar posibles errores: lo aplicaremos en "validate()"
 
 # Rango de plausibilidad: detecta textos o variaciones coladas como precio
 MIN_PRICE = 300.0
 MAX_PRICE = 10_000.0
 
-# El total debería caer entre nueva y usada. En la práctica hay 6 tripletas
-# (de 3.066) que se desvían hasta 10 €/m² por cómo redondea la fuente.
+#Margen de tolerancia en el contraste
 CROSS_CHECK_TOLERANCE = 10.0
+
+#Maximo 1 % de casos fuera del rango esperado
 CROSS_CHECK_MAX_SHARE = 0.01
 
+
+#Buscamos donde están los años, los trimestres, y las provinicias en el Excel
 
 def find_header(grid: list[list[object]]) -> tuple[int, int, dict[int, tuple[int, int]]]:
     """Localiza la columna de territorios y el mapa columna -> (año, trimestre).
 
     `grid` es la hoja en crudo, como lista de filas.
+    Es el contenido de una hoja de Excel representado como listas de python
     """
 
-    # 1. Columna de territorios: la que contiene el ancla
+    #Creamos dos variables vacias
     label_col = None
     first_data_row = None
+
+    #Recorremos una lista obteniendo simultaneamente la posicion del elemento y el propio elemento gracias a "enumerate(grid)"
+    # "r" es el número de la fila y "row" es el contenido de esa fila
     for r, row in enumerate(grid):
+
+        #Ahora al entrar en el segundo bucle, recorre las celdas de esa fila
         for c, value in enumerate(row):
+
+            #Comprobamos esta condición: Si el valor de esa celda es texto y despues de eliminar espacios sobrantes, es
+            #Igual a "TOTAL NACIONAL", entonces hemos encontrado la columna de territorios
             if isinstance(value, str) and value.strip() == LABEL_ANCHOR:
+
+                #Entonces asignamos a first_data_row el numero de la fila y a label_col el numero de la celda
                 label_col, first_data_row = c, r
+
+                #Usamos break para cortar el codigo, porque ya hemos encontrado lo que necesitamos
                 break
+        
         if label_col is not None:
             break
     if label_col is None:
@@ -114,8 +143,11 @@ def find_header(grid: list[list[object]]) -> tuple[int, int, dict[int, tuple[int
         if quarters != list(range(1, len(quarters) + 1)):
             raise ValueError(f"Trimestres no consecutivos en {year}: {quarters}")
 
+    #Devolvemos 
     return label_col, first_data_row, col_map
 
+
+#Convierte los precios del Excel en números para que python pueda utilizarlo
 
 def to_price(value: object) -> float:
     """Convierte una celda de precio a float. Vacíos y 'n.r' se vuelven NaN."""
@@ -129,6 +161,9 @@ def to_price(value: object) -> float:
             return math.nan
     raise ValueError(f"Valor de precio no reconocido: {value!r}")
 
+
+#Extraen informacion de las hojas y de los distintos archivos Excel
+#Tanto parse_sheet como parse_workbook()
 
 def parse_sheet(
     grid: list[list[object]],
@@ -156,15 +191,29 @@ def parse_sheet(
 
             # Se emite la fila aunque el precio sea NaN, para poder distinguir
             # "no publicado" (n.r) de "observación perdida por el parser".
+
+            #Aqui creamos cuantas columnas tendrá nuestro dataset
             rows.append(
                 {
+                    #Tipo de vivienda (total, nueva, usada)
                     "kind": kind,
+
+                    #Código INE de provincia (Por ejemplo Madrid = 28)
                     "province_code": code,
+
+                    #Año de la observación
                     "year": year,
+
+                    #Trimestre
                     "quarter": quarter,
+
+                    #Precio tasado por metro cuadrado
                     "price_eur_m2": price,
                 }
             )
+
+    #Una fila podria significar:
+    #El precio tasado por metro cuadrado de vivienda libre total en Madrid durante el pruimer trimestre de 2023 fue de 3000 euros
 
     return rows
 
@@ -181,6 +230,8 @@ def parse_workbook(kind: str, path: Path) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=COLUMNS)
 
 
+
+#Comprueba que los datos no tengan errores importantes
 def validate(df: pd.DataFrame) -> None:
     """Puertas de calidad. Lanza ValueError si algo no cuadra."""
     if df.empty:
@@ -243,6 +294,8 @@ def validate(df: pd.DataFrame) -> None:
                 "tienen el total fuera de nueva/usada: ¿columnas desalineadas?"
             )
 
+
+#Guardamos los datos en un CSV final
 
 def main() -> None:
     frames = []
