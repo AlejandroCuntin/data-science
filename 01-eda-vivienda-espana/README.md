@@ -18,8 +18,8 @@ Métricas de apoyo:
 | Serie | Ventana | Fuente | Nota |
 |---|---|---|---|
 | Precio €/m² (nominal y real) | 2007–2025 (+2026 parcial) | MITMA | Anual = media de 4 trimestres |
-| Nueva vs. usada | 2010–2025 | MITMA | 162 huecos `n.r`, sobre todo Teruel y Huesca |
-| Renta neta del hogar | 2015–2024 | ADRH | Sin Navarra 2015–2020 ni Álava 2015–2019 |
+| Nueva vs. usada | 2010–2025 | MITMA | 355 huecos `n.r` en nueva y 3 en usada |
+| Renta neta del hogar | 2015–2024 | ADRH | Sin Navarra 2015–2020, Álava 2015–2019, Gipuzkoa 2015 ni Total Nacional 2015–2020 |
 | Años de renta (métrica principal) | 2015–2024 | MITMA + ADRH | Intersección de ambas series |
 | Contraste de tendencia | 2007T1–2026T2 | IPV | Solo nacional y CCAA |
 
@@ -63,7 +63,8 @@ Diccionario de datos y detalle de cada fichero: [`data/raw/README.md`](data/raw/
 - [x] Estructura del proyecto
 - [x] Descarga de fuentes (MITMA, IPC, ADRH, IPV)
 - [x] Auditoría y diccionario de datos → `data/raw/README.md`
-- [ ] Limpieza y panel provincia-año
+- [x] Limpieza de MITMA e INE → 4 CSV en `data/interim/`
+- [ ] Panel provincia-año y métricas → `data/processed/`
 - [ ] Sprint 1 · Panorama nacional y mapa provincial
 - [ ] Sprint 2 · Affordability y evolución
 - [ ] Sprint 3 · Conclusiones y README final
