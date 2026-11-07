@@ -6,7 +6,7 @@
 
 `interim/` se regenera ejecutando el pipeline de `src/`; `raw/` no se regenera, se descarga y se conserva.
 
-## Productos intermedios
+## Productos generados
 
 | Fichero | Generado por | Filas | Contenido |
 |---|---|---|---|
@@ -14,3 +14,8 @@
 | `ipc_long.csv` | `python -m src.clean_ine` | 24 | Índice general anual, base 2025 = 100, 2002–2025 |
 | `adrh_long.csv` | `python -m src.clean_ine` | 530 | Renta neta media por hogar, 2015–2024, con los huecos declarados |
 | `ipv_long.csv` | `python -m src.clean_ine` | 1.560 | IPV trimestral, nacional y 19 CCAA, 2007T1–2026T2 |
+| `panel_provincia_anual.csv` | `python -m src.build_panel` | 2.703 | Precios nominales y reales, renta y años de renta por tamaño |
+
+Los cuatro primeros van a `interim/` y se regeneran con el pipeline.
+`panel_provincia_anual.csv` va a `processed/`, pesa poco y se versiona: es la
+entrada de los notebooks.
