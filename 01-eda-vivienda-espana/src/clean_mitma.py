@@ -31,7 +31,7 @@ from src.config import (
 )
 
 #Guardamos la ruta donde queremos guardar el archivo final en una constante
-#INTERIM_DIR es la ruta hasta el directorio raw/interim
+#INTERIM_DIR es la ruta hasta el directorio data/interim
 
 OUTPUT_PATH = INTERIM_DIR / "mitma_long.csv"
 
@@ -42,7 +42,7 @@ COLUMNS = ["kind", "province_code", "year", "quarter", "price_eur_m2"]
 # Pistas para localizar los elementos del Excel
 # "re.compile()" prepara un patrón de búsqueda para poder reutilizarlo
 LABEL_ANCHOR = "TOTAL NACIONAL" #Buscamos el texto TOTAL NACIONAL
-YEAR_PATTERN = re.compile(r"Año\s+(\d{4})") #Buscamos la palabra año + un numero de 4 letras
+YEAR_PATTERN = re.compile(r"Año\s+(\d{4})") #Buscamos la palabra año + un numero de 4 digitos
 QUARTER_PATTERN = re.compile(r"^([1-4])º$") #Buscamos textos como 1, 2, 3, 4
 
 
