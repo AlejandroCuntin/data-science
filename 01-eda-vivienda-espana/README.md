@@ -68,3 +68,8 @@ Diccionario de datos y detalle de cada fichero: [`data/raw/README.md`](data/raw/
 - [ ] Sprint 1 · Panorama nacional y mapa provincial
 - [ ] Sprint 2 · Affordability y evolución
 - [ ] Sprint 3 · Conclusiones y README final
+- [ ] Calculadora interactiva de esfuerzo → `web/`, al cierre del proyecto
+      - Sliders de precio €/m², renta anual del hogar y superficie 70/90/100 m²
+      - Muestra precio estimado y años de renta, con aviso de que no incluye
+        gastos, impuestos, entrada ni intereses
+      - Fase 2: provincia, año y tipo de vivienda desde `panel_provincia_anual.csv`
