@@ -65,6 +65,7 @@ Diccionario de datos y detalle de cada fichero: [`data/raw/README.md`](data/raw/
 - [x] Auditoría y diccionario de datos → `data/raw/README.md`
 - [x] Limpieza de MITMA e INE → 4 CSV en `data/interim/`
 - [x] Panel provincia-año y métricas → `data/processed/`
+- [x] Auditoría del panel → `notebooks/00_auditoria.ipynb`
 - [ ] Sprint 1 · Panorama nacional y mapa provincial
 - [ ] Sprint 2 · Affordability y evolución
 - [ ] Sprint 3 · Conclusiones y README final
