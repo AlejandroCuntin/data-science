@@ -15,6 +15,7 @@ Descargas originales, sin transformar. No se editan a mano.
 | `ine_ipc_76144_anual.xlsx` | INE · IPC base 2025 | 76144 | Nacional | 2002–2025 | índice (2025 = 100) |
 | `ine_adrh_53689_provincial.xlsx` | INE · ADRH | 53689 | Nacional, CCAA, provincia, isla | 2015–2024 | €/hogar/año |
 | `ine_ipv_79563_ccaa.xlsx` | INE · IPV base 2025 | 79563 | Nacional, CCAA | 2007T1–2026T2 | índice (2025 = 100) |
+| `cartografia/provincias_ign.geojson` | IGN · Unidades administrativas (BDLJE) | `nationallevelname=Provincia` | Provincia | 53 unidades (52 provincias + 1 residual) | polígonos, EPSG:4326 |
 
 Páginas y endpoints de descarga:
 
@@ -26,6 +27,8 @@ Páginas y endpoints de descarga:
   - `https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/76144.csv`
   - `https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/53689.csv`
   - `https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/79563.csv`
+- IGN · API OGC-Features de unidades administrativas (ver *Cartografía provincial*):
+  - `https://api-features.ign.es/collections/administrativeunit/items?nationallevelname=Provincia&limit=10&offset=0&f=json`
 
 ## Qué mide cada cosa
 
@@ -70,6 +73,42 @@ Páginas y endpoints de descarga:
 | Sin IPC 2026 | La media anual de 2026 no existe hasta enero de 2027. |
 | Nombres distintos | `Coruña (A)` ≠ `Coruña, A`; `Rioja (La)` ≠ `Rioja, La`; `Madrid (Comunidad de)` ≠ `Madrid, Comunidad de`; `Comunidad Valenciana` ≠ `Comunitat Valenciana`. Mapear por código INE. |
 | Agregado Ceuta y Melilla | Existe en MITMA, no en ADRH. No usar como provincia. |
+| Cartografía: descarga única corrupta | `limit=100` devuelve 187 MB con un corchete perdido. Descargar por tandas con `offset`. |
+
+## Cartografía provincial
+
+`cartografia/provincias_ign.geojson` son los límites provinciales del IGN (BDLJE),
+en WGS84, para pintar los mapas del análisis. Se lee, no se edita: la versión
+simplificada que consumen los notebooks se genera con `src/prepare_map.py`.
+
+- **Descarga**: 2026-11-08 · <https://api-features.ign.es/collections/administrativeunit/items>
+- **Licencia**: CC-BY 4.0 · atribución al Instituto Geográfico Nacional (IGN/CNIG).
+- **Tamaño**: 38.643.018 bytes · SHA-256 `CACDD9B345B54A677503710825A400B4CCC379D489D10ECD314BF812489C359F`.
+- **Contenido**: 53 elementos con `nationallevelname = "Provincia"`, EPSG:4326,
+  1.193.428 vértices. No es exactamente lo que devuelve el servicio, ver abajo.
+
+Cómo se generó, porque el fichero no es una descarga literal:
+
+1. La petición única (`limit=100`, 187 MB) llega **corrupta**: falta un corchete
+   a la altura de Málaga y fallan `json` y `pyogrio` (GDAL) en el mismo carácter.
+2. Se descargó en 6 tandas de 10 con `offset=0,10,20,30,40,50`, todas completas
+   (`numberReturned` = `len(features)`).
+3. Se unieron en un único `FeatureCollection` **sin tocar ninguna coordenada**,
+   solo eliminando la sangría de 4 espacios con la que el servicio formatea
+   (de 187 a 39 MB).
+
+Campos y uso:
+
+- `nationalcode` es la clave: sus caracteres 5 y 6 son el código INE de la
+  provincia (`34160100000` → `01` Álava). `nameunit` es solo para mostrar.
+- `codnut3` viene nulo en todas y no se usa.
+- La unidad `54 | Territorios no asociados a ninguna provincia` es un residuo
+  del IGN de 7 km² (islotes y zonas sin asignar). No es una provincia y se
+  descarta al cruzar con el panel, que es lo que da las 52.
+
+Validación en la descarga: 53/53 geometrías válidas y no vacías, extensión
+−18,16 a 4,33 de longitud y 27,64 a 43,79 de latitud (entra Canarias y El
+Hierro), superficie total 506.079 km² frente a ~505.990 oficiales.
 
 ## Reglas de uso
 
