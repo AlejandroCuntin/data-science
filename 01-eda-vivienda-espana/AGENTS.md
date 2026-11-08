@@ -26,6 +26,9 @@ cada carpeta del portfolio (`02`, `03`, ...) tendrá el suyo.
 - No interpolar los huecos de renta (Navarra 2015–2020, Álava 2015–2019,
   Total Nacional 2015–2020, Gipuzkoa 2015). Se declaran, no se rellenan.
 - El valor tasado no es precio de transacción: no presentarlo como tal.
+- La cartografía vive en `data/raw/cartografia/`. El código INE de cada polígono
+  sale de `nationalcode` y se valida contra `PROVINCES` antes de simplificar:
+  el IGN sirve 53 unidades, una más que provincias.
 
 ## Convenciones
 
@@ -33,7 +36,7 @@ cada carpeta del portfolio (`02`, `03`, ...) tendrá el suyo.
   en `src/`.
 - Código e identificadores en inglés; documentación y narrativa en español.
 - Un notebook = una pregunta. Nada de celdas de limpieza suelta.
-- Los notebooks se numeran (`00_auditoria`, `01_panorama`, ...) y se ejecutan de
+- Los notebooks se numeran (`00_auditoria`, `01_precios`, ...) y se ejecutan de
   arriba a abajo sin errores antes de commitear.
 
 ## Git
