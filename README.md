@@ -6,7 +6,7 @@ Proyectos de análisis de datos, de la pregunta al hallazgo. Cada carpeta contie
 
 | # | Proyecto | Pregunta | Stack | Estado |
 |---|----------|----------|-------|--------|
-| 01 | [EDA Vivienda España](01-eda-vivienda-espana/) | ¿Cuánto esfuerzo cuesta comprar vivienda en España y dónde duele más? | Python · pandas · geopandas | En curso |
+| 01 | [EDA Vivienda España](01-eda-vivienda-espana/) | ¿Cuánto esfuerzo cuesta comprar vivienda en España y dónde duele más? | Python · pandas · geopandas · JS | Completado |
 
 ## Convenciones
 
