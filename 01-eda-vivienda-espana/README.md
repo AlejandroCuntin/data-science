@@ -66,8 +66,11 @@ Diccionario de datos y detalle de cada fichero: [`data/raw/README.md`](data/raw/
 - [x] Limpieza de MITMA e INE → 4 CSV en `data/interim/`
 - [x] Panel provincia-año y métricas → `data/processed/`
 - [x] Auditoría del panel → `notebooks/00_auditoria.ipynb`
-- [ ] Sprint 1 · Panorama nacional y mapa provincial
-- [ ] Sprint 2 · Affordability y evolución
+- [x] Sprint 1 · Panorama nacional y mapa provincial → `notebooks/01_precios.ipynb`
+- [x] Sprint 2 · Affordability y evolución → `notebooks/02_asequibilidad.ipynb`
+      - De las 49 provincias con serie completa, 45 mejoran y 4 empeoran; la
+        brecha la explica el precio, no la renta. En 2024, la mediana provincial
+        de 90 m² es 117.426 €; Madrid, 291.596 €.
 - [ ] Sprint 3 · Conclusiones y README final
 - [ ] Calculadora interactiva de esfuerzo → `web/`, al cierre del proyecto
       - Sliders de precio €/m², renta anual del hogar y superficie 70/90/100 m²
