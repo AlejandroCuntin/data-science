@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e8">
+  <title>Calculadora de asequibilidad · Vivienda en España</title>
+  <meta name="description" content="Calcula los años de renta o la cuota hipotecaria de una vivienda de 70, 90 o 100 m² en las 52 provincias españolas, 2015–2024.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-ready="false">
+  <a class="skip-link" href="#calculadora">Saltar a la calculadora</a>
+
+  <div class="page">
+    <header class="masthead">
+      <p class="kicker">
+        <span>EDA · Vivienda en España</span>
+        <span>2015—2024</span>
+      </p>
+
+      <div class="masthead-grid">
+        <div>
+          <h1>¿Cuánto cuesta una <em>casa</em>?</h1>
+          <p class="lede">
+            Dos formas de medir el mismo precio: los años de renta que cuesta
+            una vivienda o la cuota mensual de una hipoteca. Elige provincia,
+            año y superficie, y ajusta tu caso.
+          </p>
+        </div>
+
+        <aside class="refs" aria-label="Cifras de referencia">
+          <p class="refs-title">Referencia <span id="ref-year">2024</span> · total</p>
+          <dl>
+            <div>
+              <dt>Años en España</dt>
+              <dd id="ref-years">—</dd>
+            </div>
+            <div>
+              <dt>Vivienda mediana · 90 m²</dt>
+              <dd id="ref-price">—</dd>
+            </div>
+            <div>
+              <dt>Más caras que España</dt>
+              <dd id="ref-above">—</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </header>
+
+    <main id="calculadora">
+      <noscript>
+        <p class="noscript">
+          Esta calculadora necesita JavaScript para cargar el panel y calcular
+          los resultados. El análisis completo sigue disponible en el notebook.
+        </p>
+      </noscript>
+      <section class="calculator" aria-labelledby="calc-title">
+        <div class="section-head">
+          <p class="section-num">01</p>
+          <div>
+            <h2 id="calc-title">Calculadora</h2>
+            <p>Los valores se cargan del panel. Puedes editarlos para simular tu propio caso.</p>
+          </div>
+        </div>
+
+        <fieldset class="mode-switch">
+          <legend class="sr-only">Modo de cálculo</legend>
+          <div class="mode-track">
+            <input type="radio" name="mode" id="mode-years" value="years" checked>
+            <label for="mode-years">Años de renta</label>
+            <input type="radio" name="mode" id="mode-mortgage" value="mortgage">
+            <label for="mode-mortgage">Cuota hipotecaria</label>
+          </div>
+        </fieldset>
+
+        <div class="calc-grid">
+          <form class="controls" id="controls" autocomplete="off">
+            <fieldset class="control-group">
+              <legend><span class="num">01</span> Contexto</legend>
+
+              <div class="field">
+                <label for="province">Provincia</label>
+                <select id="province"></select>
+              </div>
+
+              <div class="field">
+                <label for="year">Año</label>
+                <select id="year" aria-describedby="coverage-note"></select>
+                <p class="field-note" id="coverage-note"></p>
+              </div>
+
+              <fieldset class="segmented">
+                <legend>Tipo de vivienda</legend>
+                <div class="segmented-track">
+                  <input type="radio" name="kind" id="kind-total" value="total" checked>
+                  <label for="kind-total">Total</label>
+                  <input type="radio" name="kind" id="kind-nueva" value="nueva">
+                  <label for="kind-nueva">Nueva</label>
+                  <input type="radio" name="kind" id="kind-usada" value="usada">
+                  <label for="kind-usada">Usada</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="segmented">
+                <legend>Superficie</legend>
+                <div class="segmented-track">
+                  <input type="radio" name="surface" id="surface-70" value="70">
+                  <label for="surface-70">70 m²</label>
+                  <input type="radio" name="surface" id="surface-90" value="90" checked>
+                  <label for="surface-90">90 m²</label>
+                  <input type="radio" name="surface" id="surface-100" value="100">
+                  <label for="surface-100">100 m²</label>
+                </div>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="control-group">
+              <legend><span class="num">02</span> Tu caso</legend>
+
+              <div class="field-head">
+                <p class="group-hint">Valores del panel. Puedes editarlos.</p>
+                <button type="button" class="text-button" id="reset" disabled>Restablecer</button>
+              </div>
+
+              <div class="field">
+                <label for="price">Precio de la vivienda</label>
+                <div class="range-row">
+                  <input type="range" id="price-range" min="300" max="5000" step="5" aria-label="Precio por metro cuadrado">
+                  <div class="number-wrap">
+                    <input type="text" id="price" inputmode="decimal" aria-label="Precio de la vivienda en euros por metro cuadrado">
+                    <span class="unit">€/m²</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="income">Renta neta anual del hogar</label>
+                <div class="range-row">
+                  <input type="range" id="income-range" min="0" max="100000" step="500" aria-label="Renta neta anual del hogar">
+                  <div class="number-wrap">
+                    <input type="text" id="income" inputmode="decimal" aria-label="Renta neta anual del hogar en euros" aria-describedby="income-note">
+                    <span class="unit">€/año</span>
+                  </div>
+                </div>
+                <p class="field-note" id="income-note">Renta media por hogar del año y la provincia elegidos.</p>
+              </div>
+            </fieldset>
+
+            <fieldset class="control-group" id="mortgage-inputs" hidden>
+              <legend><span class="num">03</span> Hipoteca</legend>
+
+              <div class="field">
+                <label for="down">Entrada</label>
+                <div class="range-row">
+                  <input type="range" id="down-range" min="0" max="100" step="1" aria-label="Porcentaje de entrada">
+                  <div class="number-wrap">
+                    <input type="text" id="down" inputmode="decimal" aria-label="Porcentaje de entrada sobre el precio">
+                    <span class="unit">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="rate">Tipo de interés fijo</label>
+                <div class="range-row">
+                  <input type="range" id="rate-range" min="0" max="8" step="0.05" aria-label="Tipo de interés fijo anual">
+                  <div class="number-wrap">
+                    <input type="text" id="rate" inputmode="decimal" aria-label="Tipo de interés fijo anual en porcentaje">
+                    <span class="unit">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="term">Plazo</label>
+                <div class="range-row">
+                  <input type="range" id="term-range" min="5" max="40" step="1" aria-label="Plazo de la hipoteca en años">
+                  <div class="number-wrap">
+                    <input type="text" id="term" inputmode="numeric" aria-label="Plazo de la hipoteca en años">
+                    <span class="unit">años</span>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <aside class="result" aria-labelledby="result-title">
+            <div class="result-head">
+              <p class="kicker">Resultado</p>
+              <h2 id="result-title" class="sr-only">Resultado del cálculo</h2>
+            </div>
+
+            <div id="result-years" class="result-variant">
+              <p class="result-label">Años de renta</p>
+              <p class="result-number">
+                <span id="years-value">—</span>
+                <span class="unit">años</span>
+              </p>
+              <p class="result-caption" id="years-caption">Cargando datos…</p>
+
+              <dl class="stats">
+                <div>
+                  <dt>Precio de la vivienda</dt>
+                  <dd id="years-price">—</dd>
+                </div>
+                <div>
+                  <dt>Renta neta anual</dt>
+                  <dd id="years-income">—</dd>
+                </div>
+                <div>
+                  <dt>Precio por m²</dt>
+                  <dd id="years-ppm">—</dd>
+                </div>
+                <div>
+                  <dt>Renta mensual</dt>
+                  <dd id="years-monthly">—</dd>
+                </div>
+              </dl>
+
+              <div class="comparison">
+                <p class="comparison-title">Dónde cae tu caso</p>
+                <div class="dist" id="dist-years" role="img" aria-label="Distribución provincial de los años de renta">
+                  <div class="dist-legend">
+                    <span class="key key-you"><span class="swatch"></span>Tu caso</span>
+                    <span class="key key-spain" id="key-spain-years"><span class="swatch"></span>España</span>
+                  </div>
+                  <div class="dist-track">
+                    <div class="dist-rug" id="rug-years"></div>
+                    <div class="dist-marker dist-spain" id="spain-years" hidden></div>
+                    <div class="dist-marker dist-you" id="you-years" hidden></div>
+                  </div>
+                  <div class="dist-axis" id="axis-years"></div>
+                  <p class="dist-note" id="dist-note-years" hidden></p>
+                </div>
+                <p class="rank" id="rank-years"></p>
+                <p class="ref-line" id="ref-line-years"></p>
+              </div>
+
+              <p class="caveat">
+                Sin intereses, entrada ni gastos: es un suelo, no una cuota.
+                El precio es valor tasado, no precio de compraventa.
+              </p>
+            </div>
+
+            <div id="result-mortgage" class="result-variant" hidden>
+              <p class="result-label">Cuota mensual estimada</p>
+              <p class="result-number">
+                <span id="mortgage-value">—</span>
+                <span class="unit">/mes</span>
+              </p>
+              <p class="result-caption" id="mortgage-caption">Cargando datos…</p>
+
+              <div class="share">
+                <div class="share-head">
+                  <p class="share-label">Sobre la renta mensual</p>
+                  <p class="share-value" id="mortgage-share">—</p>
+                </div>
+                <div class="share-bar">
+                  <span class="share-fill" id="share-fill"></span>
+                  <span class="share-threshold"><span>30 %</span></span>
+                </div>
+                <div class="share-scale">
+                  <span>0 %</span>
+                  <span>100 %</span>
+                </div>
+                <p class="share-note" id="share-note"></p>
+              </div>
+
+              <dl class="stats">
+                <div>
+                  <dt>Préstamo</dt>
+                  <dd id="mortgage-loan">—</dd>
+                </div>
+                <div>
+                  <dt>Entrada</dt>
+                  <dd id="mortgage-down">—</dd>
+                </div>
+                <div>
+                  <dt>Intereses</dt>
+                  <dd id="mortgage-interest">—</dd>
+                </div>
+                <div>
+                  <dt>Coste total</dt>
+                  <dd id="mortgage-cost">—</dd>
+                </div>
+              </dl>
+
+              <div class="comparison">
+                <p class="comparison-title">Dónde cae tu caso</p>
+                <div class="dist" id="dist-mortgage" role="img" aria-label="Distribución provincial del porcentaje de renta destinado a la hipoteca">
+                  <div class="dist-legend">
+                    <span class="key key-you"><span class="swatch"></span>Tu caso</span>
+                    <span class="key key-spain" id="key-spain-mortgage"><span class="swatch"></span>España</span>
+                    <span class="key key-threshold"><span class="swatch"></span>30 % de referencia</span>
+                  </div>
+                  <div class="dist-track">
+                    <div class="dist-rug" id="rug-mortgage"></div>
+                    <div class="dist-marker dist-spain" id="spain-mortgage" hidden></div>
+                    <div class="dist-marker dist-threshold" id="threshold-mortgage" hidden></div>
+                    <div class="dist-marker dist-you" id="you-mortgage" hidden></div>
+                  </div>
+                  <div class="dist-axis" id="axis-mortgage"></div>
+                  <p class="dist-note" id="dist-note-mortgage" hidden></p>
+                </div>
+                <p class="rank" id="rank-mortgage"></p>
+                <p class="ref-line" id="ref-line-mortgage"></p>
+              </div>
+
+              <p class="caveat">
+                Simulación a tipo fijo. No incluye seguros, impuestos, notaría
+                ni otros gastos. La referencia del 30 % es orientativa, no una
+                regla oficial.
+              </p>
+            </div>
+
+            <p class="sr-only" aria-live="polite" aria-atomic="true" id="live"></p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="method" aria-labelledby="method-title">
+        <div class="section-head">
+          <p class="section-num">02</p>
+          <div>
+            <h2 id="method-title">Cómo se calcula</h2>
+            <p>Dos fórmulas sencillas, con los supuestos a la vista.</p>
+          </div>
+        </div>
+
+        <div class="method-grid">
+          <div class="formula">
+            <h3>Años de renta</h3>
+            <p class="formula-line">(€/m² × m²) ÷ renta neta anual</p>
+            <p>
+              Mide cuántas rentas anuales del hogar cuesta la vivienda. No incluye
+              intereses, entrada ni gastos: es un suelo, no una cuota. Sirve para
+              comparar provincias y años, no para saber si un banco dará la
+              hipoteca.
+            </p>
+          </div>
+
+          <div class="formula">
+            <h3>Cuota hipotecaria</h3>
+            <p class="formula-line">cuota = préstamo × i ÷ (1 − (1 + i)<sup>−n</sup>)</p>
+            <p>
+              Con <strong>i</strong> = tipo anual ÷ 12 y <strong>n</strong> = plazo
+              en años × 12. La entrada se resta del precio y el resto se financia
+              a tipo fijo. Si el tipo es 0, la cuota es el préstamo dividido entre
+              los meses.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="limits" aria-labelledby="limits-title">
+        <div class="section-head">
+          <p class="section-num">03</p>
+          <div>
+            <h2 id="limits-title">Qué no dice esta calculadora</h2>
+            <p>Los límites importan tanto como el resultado.</p>
+          </div>
+        </div>
+
+        <ul class="limits-list">
+          <li>
+            <strong>Valor tasado, no precio de compraventa.</strong>
+            El precio sale de MITMA: lo que valora una tasadora, no lo que se
+            firma en una escritura. Compara bien provincias y años; no acierta el
+            precio exacto de un piso.
+          </li>
+          <li>
+            <strong>Precio bruto.</strong>
+            No incluye IVA/ITP, notaría, registro, seguros, comunidad ni
+            reformas. El desembolso real de comprar es mayor.
+          </li>
+          <li>
+            <strong>La cuota es una simulación.</strong>
+            Tipo fijo, sin comisiones ni cambios de Euríbor. No es una oferta
+            bancaria ni asesoramiento financiero.
+          </li>
+          <li>
+            <strong>Provincia no es ciudad.</strong>
+            Dentro de Madrid o Málaga conviven la capital, la costa y el interior.
+            El dato provincial las mezcla.
+          </li>
+          <li>
+            <strong>Renta por hogar.</strong>
+            No distingue hogares de una o cuatro personas. Si cambia el tamaño
+            del hogar, la comparación se contamina.
+          </li>
+          <li>
+            <strong>2025 y 2026 quedan fuera.</strong>
+            2025 tiene precio, pero no renta; 2026 es parcial (solo Q1–Q2). Los
+            huecos de renta no se interpolan.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Precio: MITMA, valor tasado de vivienda libre. Renta: INE, ADRH.
+        Serie 2015–2024; 52 provincias y total nacional.
+      </p>
+      <nav aria-label="Enlaces del proyecto">
+        <a href="../README.md">Metodología</a>
+        <a href="../notebooks/02_asequibilidad.ipynb">Notebook 02</a>
+        <a href="../../README.md">Portfolio</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script src="calc.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
