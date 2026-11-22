@@ -5,7 +5,7 @@
 # Datos intermedios: derivados y reproducibles
 data/interim/
 CONCEPTOS.md
-
+documentacion_proyecto1.docx
 # Python
 __pycache__/
 *.py[cod]
