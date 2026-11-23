@@ -70,14 +70,14 @@ En lugar de elegir los ajustes de los modelos a ojo, usamos **`RandomizedSearchC
 
 Checklist paso a paso basado en las recomendaciones de NotebookLM para completar el notebook [`notebooks/01-iris.ipynb`](notebooks/01-iris.ipynb) y dejar el README final listo para reclutadores:
 
-### Paso 1: Análisis Exploratorio Visual (EDA - Pairplot)
-- [ ] Importar `seaborn as sns` y `matplotlib.pyplot as plt`.
-- [ ] Crear el gráfico de dispersión cruzado (**Pairplot**) coloreado por especie:
+### Paso 1: Análisis Exploratorio Visual (EDA - Pairplot) ✅
+- [x] Importar `seaborn as sns` y `matplotlib.pyplot as plt`.
+- [x] Crear el gráfico de dispersión cruzado (**Pairplot**) coloreado por especie:
   ```python
   sns.pairplot(iris_df, hue='species', diag_kind='hist')
   ```
-- [ ] Anotar cómo **`setosa`** queda totalmente aislada mientras que **`versicolor`** y **`virginica`** se solapan ligeramente.
-- [ ] Crear la carpeta `reports/figures/` y guardar la imagen (`plt.savefig("../reports/figures/01_pairplot_iris.png")`).
+- [x] Anotar cómo **`setosa`** queda totalmente aislada mientras que **`versicolor`** y **`virginica`** se solapan ligeramente.
+- [x] Crear la carpeta `reports/figures/` y guardar la imagen (`plt.savefig("../reports/figures/01_pairplot_iris.png")`).
 
 ### Paso 2: Corregir aviso en Regresión Logística y ver hiperparámetros ganadores
 - [ ] En la celda de `LogisticRegression`, cambiar `'penalty': ['none', 'l2']` por `'penalty': ['l2']` (o `None` sin comillas) para evitar los warnings.
