@@ -84,12 +84,12 @@ Checklist paso a paso basado en las recomendaciones de NotebookLM para completar
 - [x] Ver qué combinación ganó ejecutando `grid_search_log_reg.best_params_` y `grid_search_rf.best_params_`.
 - [x] Ver la nota media de validación cruzada en entrenamiento con `grid_search_log_reg.best_score_` y `grid_search_rf.best_score_`.
 
-### Paso 3: Añadir los algoritmos que sugiere el vídeo (Árbol de Decisión simple y SVM)
+### Paso 3: Añadir los algoritmos que sugiere el vídeo (Árbol de Decisión simple y SVM) ✅
 - [x] **Árbol de Decisión individual (`DecisionTreeClassifier`):**
   * Importar `from sklearn.tree import DecisionTreeClassifier`.
   * Entrenarlo con `RandomizedSearchCV` probando `'max_depth': [None, 2, 3, 5, 10]`.
   * *Objetivo:* Usarlo como línea base para comparar un solo árbol contra el **Random Forest**.
-- [ ] **Support Vector Machine (`SVC`):**
+- [x] **Support Vector Machine (`SVC`):**
   * Importar `from sklearn.svm import SVC`.
   * Entrenarlo con `RandomizedSearchCV` probando `'C': [0.1, 1, 10, 100]` y `'kernel': ['linear', 'rbf']`.
 
@@ -100,9 +100,9 @@ Checklist paso a paso basado en las recomendaciones de NotebookLM para completar
 | Modelo | CV Accuracy (Train) | Accuracy (Test) | F1-Score | Mejor Hiperparámetro |
 |---|---|---|---|---|
 | **Regresión Logística** | `95.83%` | `100.0%` | *pendiente* | `C=21.54` |
-| **Árbol de Decisión** | *pendiente* | *pendiente* | *pendiente* | `max_depth=...` |
+| **Árbol de Decisión** | `95.00%` | *pendiente* | *pendiente* | `max_depth=None, min_samples_split=2` |
 | **Random Forest** | `95.83%` | `100.0%` | *pendiente* | `n_estimators=200, max_depth=20` |
-| **SVM (SVC)** | *pendiente* | *pendiente* | *pendiente* | `C=..., kernel=...` |
+| **SVM (SVC)** | `95.83%` | *pendiente* | *pendiente* | `C=10, kernel='linear'` |
 
 ### Paso 5: Matriz de Confusión e Importancia de Variables
 - [ ] Importar `from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay`.
