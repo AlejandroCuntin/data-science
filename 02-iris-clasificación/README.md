@@ -79,10 +79,10 @@ Checklist paso a paso basado en las recomendaciones de NotebookLM para completar
 - [x] Anotar cómo **`setosa`** queda totalmente aislada mientras que **`versicolor`** y **`virginica`** se solapan ligeramente.
 - [x] Crear la carpeta `reports/figures/` y guardar la imagen (`plt.savefig("../reports/figures/01_pairplot_iris.png")`).
 
-### Paso 2: Corregir aviso en Regresión Logística y ver hiperparámetros ganadores
-- [ ] En la celda de `LogisticRegression`, cambiar `'penalty': ['none', 'l2']` por `'penalty': ['l2']` (o `None` sin comillas) para evitar los warnings.
-- [ ] Ver qué combinación ganó ejecutando `grid_search_log_reg.best_params_` y `grid_search_rf.best_params_`.
-- [ ] Ver la nota media de validación cruzada en entrenamiento con `grid_search_log_reg.best_score_` y `grid_search_rf.best_score_`.
+### Paso 2: Corregir aviso en Regresión Logística y ver hiperparámetros ganadores ✅
+- [x] En la celda de `LogisticRegression`, cambiar `'penalty': ['none', 'l2']` por `'penalty': ['l2']` (o `None` sin comillas) para evitar los warnings.
+- [x] Ver qué combinación ganó ejecutando `grid_search_log_reg.best_params_` y `grid_search_rf.best_params_`.
+- [x] Ver la nota media de validación cruzada en entrenamiento con `grid_search_log_reg.best_score_` y `grid_search_rf.best_score_`.
 
 ### Paso 3: Añadir los algoritmos que sugiere el vídeo (Árbol de Decisión simple y SVM)
 - [ ] **Árbol de Decisión individual (`DecisionTreeClassifier`):**
@@ -99,9 +99,9 @@ Checklist paso a paso basado en las recomendaciones de NotebookLM para completar
 
 | Modelo | CV Accuracy (Train) | Accuracy (Test) | F1-Score | Mejor Hiperparámetro |
 |---|---|---|---|---|
-| **Regresión Logística** | *pendiente* | `100.0%` | *pendiente* | `C=..., penalty=...` |
+| **Regresión Logística** | `95.83%` | `100.0%` | *pendiente* | `C=21.54` |
 | **Árbol de Decisión** | *pendiente* | *pendiente* | *pendiente* | `max_depth=...` |
-| **Random Forest** | *pendiente* | `100.0%` | *pendiente* | `n_estimators=..., max_depth=...` |
+| **Random Forest** | `95.83%` | `100.0%` | *pendiente* | `n_estimators=200, max_depth=20` |
 | **SVM (SVC)** | *pendiente* | *pendiente* | *pendiente* | `C=..., kernel=...` |
 
 ### Paso 5: Matriz de Confusión e Importancia de Variables
