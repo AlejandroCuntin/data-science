@@ -7,7 +7,7 @@ Proyectos de análisis de datos, de la pregunta al hallazgo. Cada carpeta contie
 | # | Proyecto | Pregunta | Stack | Estado |
 |---|----------|----------|-------|--------|
 | 01 | [EDA Vivienda España](01-eda-vivienda-espana/) | ¿Cuánto esfuerzo cuesta comprar vivienda en España y dónde duele más? | Python · pandas · geopandas · JS | Completado |
-| 02 | [Clasificación Iris](02-iris-clasificación/) | ¿Cómo clasificar especies de flores comparando Regresión Logística y Random Forest con optimización de hiperparámetros? | Python · pandas · scikit-learn | Completado |
+| 02 | [Clasificación Iris](02-iris-clasificación/) | ¿Cómo clasificar especies de flores comparando Regresión Logística, Árbol de Decisión, Random Forest y SVM? | Python · pandas · scikit-learn · seaborn | Completado |
 
 ## Convenciones
 
