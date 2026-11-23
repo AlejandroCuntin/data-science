@@ -85,7 +85,7 @@ Checklist paso a paso basado en las recomendaciones de NotebookLM para completar
 - [x] Ver la nota media de validación cruzada en entrenamiento con `grid_search_log_reg.best_score_` y `grid_search_rf.best_score_`.
 
 ### Paso 3: Añadir los algoritmos que sugiere el vídeo (Árbol de Decisión simple y SVM)
-- [ ] **Árbol de Decisión individual (`DecisionTreeClassifier`):**
+- [x] **Árbol de Decisión individual (`DecisionTreeClassifier`):**
   * Importar `from sklearn.tree import DecisionTreeClassifier`.
   * Entrenarlo con `RandomizedSearchCV` probando `'max_depth': [None, 2, 3, 5, 10]`.
   * *Objetivo:* Usarlo como línea base para comparar un solo árbol contra el **Random Forest**.
