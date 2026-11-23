@@ -93,16 +93,16 @@ Checklist paso a paso basado en las recomendaciones de NotebookLM para completar
   * Importar `from sklearn.svm import SVC`.
   * Entrenarlo con `RandomizedSearchCV` probando `'C': [0.1, 1, 10, 100]` y `'kernel': ['linear', 'rbf']`.
 
-### Paso 4: Calcular F1-Score y completar la Tabla Comparativa
-- [ ] Importar `from sklearn.metrics import f1_score`.
-- [ ] Calcular `f1_score(y_test, y_pred, average='macro')` para cada modelo y rellenar esta tabla:
+### Paso 4: Calcular F1-Score y completar la Tabla Comparativa ✅
+- [x] Importar `from sklearn.metrics import f1_score`.
+- [x] Calcular `f1_score(y_test, y_pred, average='macro')` para cada modelo y rellenar esta tabla:
 
 | Modelo | CV Accuracy (Train) | Accuracy (Test) | F1-Score | Mejor Hiperparámetro |
 |---|---|---|---|---|
-| **Regresión Logística** | `95.83%` | `100.0%` | *pendiente* | `C=21.54` |
-| **Árbol de Decisión** | `95.00%` | *pendiente* | *pendiente* | `max_depth=None, min_samples_split=2` |
-| **Random Forest** | `95.83%` | `100.0%` | *pendiente* | `n_estimators=200, max_depth=20` |
-| **SVM (SVC)** | `95.83%` | *pendiente* | *pendiente* | `C=10, kernel='linear'` |
+| **Regresión Logística** | `95.83%` | `100.0%` | `1.0000` | `C=21.54` |
+| **Árbol de Decisión** | `95.00%` | `100.0%` | `1.0000` | `max_depth=None, min_samples_split=2` |
+| **Random Forest** | `95.83%` | `100.0%` | `1.0000` | `n_estimators=200, max_depth=20` |
+| **SVM (SVC)** | `95.83%` | `96.67%` | `0.9659` | `C=10, kernel='linear'` |
 
 ### Paso 5: Matriz de Confusión e Importancia de Variables
 - [ ] Importar `from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay`.
