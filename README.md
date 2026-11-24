@@ -8,6 +8,7 @@ Proyectos de análisis de datos, de la pregunta al hallazgo. Cada carpeta contie
 |---|----------|----------|-------|--------|
 | 01 | [EDA Vivienda España](01-eda-vivienda-espana/) | ¿Cuánto esfuerzo cuesta comprar vivienda en España y dónde duele más? | Python · pandas · geopandas · JS | Completado |
 | 02 | [Clasificación Iris](02-iris-clasificación/) | ¿Cómo clasificar especies de flores comparando Regresión Logística, Árbol de Decisión, Random Forest y SVM? | Python · pandas · scikit-learn · seaborn | Completado |
+| 03 | [Regresión Lineal desde Cero](03-regresión-lineal/) | ¿Cómo aprende una máquina bajo el capó programando una Regresión Lineal y el Descenso del Gradiente 100% desde cero con NumPy? | Python · NumPy · matplotlib | En progreso |
 
 ## Convenciones
 
