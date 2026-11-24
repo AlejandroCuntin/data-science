@@ -13,12 +13,12 @@ Sigue estos pasos dentro de `notebooks/01-regresion-lineal.ipynb`:
 - [x] Generar o cargar nuestro dataset lineal (por ejemplo: **Años de Experiencia ($x$) vs. Salario ($y$)**) y guardarlo en `data/`.
 - [x] Dibujar un gráfico de dispersión (**Scatter Plot**) con `matplotlib` para ver la tendencia lineal de los puntos y guardarlo en `reports/figures/01_scatter_datos.png`.
 
-### Fase 2: Programar la Recta ($\hat{y} = w \cdot x + b$) y el Medidor de Error (MSE)
-- [ ] Programar la función de predicción de la recta:
+### Fase 2: Programar la Recta ($\hat{y} = w \cdot x + b$) y el Medidor de Error (MSE) ✅
+- [x] Programar la función de predicción de la recta:
   $$\hat{y} = w \cdot x + b$$
-- [ ] Programar la función de coste / error cuadrático medio (**MSE - Mean Squared Error**):
+- [x] Programar la función de coste / error cuadrático medio (**MSE - Mean Squared Error**):
   $$\text{MSE} = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2$$
-- [ ] Probar cuánto error da una recta inicial puesta a ciegas (con $w = 0$ y $b = 0$).
+- [x] Probar cuánto error da una recta inicial puesta a ciegas (con $w = 0$ y $b = 0$, dando un error inicial $\text{MSE} = 1750.74$).
 
 ### Fase 3: Programar el Motor de Aprendizaje (Descenso del Gradiente)
 - [ ] Calcular las derivadas (gradientes $dw$ y $db$), que indican hacia dónde debemos girar ($w$) y subir/bajar ($b$) la recta para reducir el error:
