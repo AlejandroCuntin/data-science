@@ -20,13 +20,14 @@ Sigue estos pasos dentro de `notebooks/01-regresion-lineal.ipynb`:
   $$\text{MSE} = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2$$
 - [x] Probar cuánto error da una recta inicial puesta a ciegas (con $w = 0$ y $b = 0$, dando un error inicial $\text{MSE} = 1750.74$).
 
-### Fase 3: Programar el Motor de Aprendizaje (Descenso del Gradiente)
-- [ ] Calcular las derivadas (gradientes $dw$ y $db$), que indican hacia dónde debemos girar ($w$) y subir/bajar ($b$) la recta para reducir el error:
+### Fase 3: Programar el Motor de Aprendizaje (Descenso del Gradiente) ✅
+- [x] Calcular las derivadas (gradientes $dw$ y $db$), que indican hacia dónde debemos girar ($w$) y subir/bajar ($b$) la recta para reducir el error:
   $$dw = -\frac{2}{N} \sum_{i=1}^{N} x_i \cdot (y_i - \hat{y}_i)$$
   $$db = -\frac{2}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)$$
-- [ ] Actualizar $w$ y $b$ paso a paso en un bucle de entrenamiento (`epochs`) usando una tasa de aprendizaje (`learning_rate`, $\alpha$):
+- [x] Actualizar $w$ y $b$ paso a paso en un bucle de entrenamiento (`epochs = 3000`) usando una tasa de aprendizaje (`learning_rate = 0.01`):
   $$w = w - \alpha \cdot dw$$
   $$b = b - \alpha \cdot db$$
+  *(El algoritmo descubrió por sí solo $w = 3.27$ y $b = 22.87$, bajando el error MSE de $1750.74$ a $2.76$).*
 
 ### Fase 4: Visualizar cómo Aprende la Máquina
 - [ ] **Gráfico 1 (Curva de Aprendizaje):** Graficar cómo cae el error **MSE** época tras época hasta estabilizarse cerca de cero (`reports/figures/02_curva_error_mse.png`).
