@@ -9,37 +9,57 @@
   "colorGroups": [
     {
       "query": "path:00-Indice",
-      "color": { "a": 1, "rgb": 16761095 }
+      "color": {
+        "a": 1,
+        "rgb": 16761095
+      }
     },
     {
       "query": "path:01-Proyectos",
-      "color": { "a": 1, "rgb": 3899391 }
+      "color": {
+        "a": 1,
+        "rgb": 3899391
+      }
     },
     {
       "query": "path:02-Algoritmos",
-      "color": { "a": 1, "rgb": 11361791 }
+      "color": {
+        "a": 1,
+        "rgb": 11361791
+      }
     },
     {
       "query": "path:03-Conceptos-y-Motor-IA",
-      "color": { "a": 1, "rgb": 2932878 }
+      "color": {
+        "a": 1,
+        "rgb": 2932878
+      }
     },
     {
       "query": "path:04-Metricas",
-      "color": { "a": 1, "rgb": 16748574 }
+      "color": {
+        "a": 1,
+        "rgb": 16748574
+      }
     },
     {
       "query": "path:05-Librerias",
-      "color": { "a": 1, "rgb": 2015463 }
+      "color": {
+        "a": 1,
+        "rgb": 2015463
+      }
     }
   ],
   "collapse-display": false,
-  "showArrow": true,
-  "textFadeMultiplier": -1,
-  "nodeSizeMultiplier": 1.15,
-  "lineSizeMultiplier": 1.1,
+  "showArrow": false,
+  "textFadeMultiplier": 0.8,
+  "nodeSizeMultiplier": 1.61833538840937,
+  "lineSizeMultiplier": 0.728964241676942,
   "collapse-forces": false,
-  "centerStrength": 0.45,
-  "repulsionStrength": 12,
-  "linkStrength": 0.9,
-  "linkDistance": 220
+  "centerStrength": 0.444019728729963,
+  "repelStrength": 7.30209617755857,
+  "linkStrength": 0.716276202219482,
+  "linkDistance": 384,
+  "scale": 1,
+  "close": true
 }
