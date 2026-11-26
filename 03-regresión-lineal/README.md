@@ -38,9 +38,9 @@ Sigue estos pasos dentro de `notebooks/01-regresion-lineal.ipynb`:
   * `modelo.fit(X, y)` $\rightarrow$ Entrena la recta con Descenso del Gradiente.
   * `modelo.predict(X)` $\rightarrow$ Predice valores nuevos con los $w$ y $b$ aprendidos.
 
-### Fase 6: Prueba de Fuego (Tu Modelo desde Cero vs. Scikit-learn Oficial)
-- [ ] Programar desde cero la métrica de evaluación **$R^2$ (Coeficiente de Determinación)**, que mide de 0 a 1 (0% a 100%) qué tan bien explica nuestra recta los datos.
-- [ ] Entrenar el `LinearRegression()` oficial de `scikit-learn` con los mismos datos **solo para comparar** y rellenar la tabla final de resultados demostrando que nuestro algoritmo llega a la misma solución matemática.
+### Fase 6: Prueba de Fuego (Tu Modelo desde Cero vs. Scikit-learn Oficial) ✅
+- [x] Programar desde cero la métrica de evaluación **$R^2$ (Coeficiente de Determinación)**, que mide de 0 a 1 (0% a 100%) qué tan bien explica nuestra recta los datos (`96.55%`).
+- [x] Entrenar el `LinearRegression()` oficial de `scikit-learn` con los mismos datos **solo para comparar** y rellenar la tabla final de resultados demostrando que nuestro algoritmo llega a la misma solución matemática.
 
 ---
 
@@ -82,12 +82,13 @@ Imagina que estás en una montaña a oscuras y quieres bajar al valle más profu
 
 ## 4. Resultados: Modelo desde Cero vs. Scikit-learn
 
-> *(Rellenar tras completar la Fase 6)*
-
-| Implementación | Pendiente ($w$) | Sesgo / Intercepto ($b$) | Error Final (MSE) | Nota $R^2$ (Test) |
+| Implementación | Pendiente ($w$) | Sesgo / Intercepto ($b$) | Error Final (MSE) | Nota $R^2$ |
 |---|---|---|---|---|
-| **Nuestra Regresión (100% NumPy)** | *pendiente* | *pendiente* | *pendiente* | *pendiente* |
-| **Scikit-learn (`LinearRegression`)** | *pendiente* | *pendiente* | *pendiente* | *pendiente* |
+| **Nuestra Regresión (100% NumPy)** | `3.2736` | `22.8689` | `2.7620` | `96.55%` |
+| **Scikit-learn (`LinearRegression`)** | `3.2735` | `22.8692` | `2.7620` | `96.55%` |
+
+> **¿Por qué hay una diferencia de $0.0001$ en el cuarto decimal?**
+> `LinearRegression` de Scikit-learn resuelve una ecuación matricial directa (*Mínimos Cuadrados Ordinarios / OLS*), mientras que nuestro algoritmo se aproxima dando pasitos mediante **Descenso del Gradiente** (`epochs=3000`). Con 5.000 épocas ambos coinciden hasta en el último decimal, y tanto el **MSE (`2.762`)** como el **$R^2$ (`96.55%`)** son idénticos.
 
 ---
 
