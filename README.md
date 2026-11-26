@@ -27,4 +27,4 @@ pip install -r requirements.txt
 
 ## Autor
 
-Alejandro Cuntín
+Alejandro Cuntin Bariteau
