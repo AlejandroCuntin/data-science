@@ -29,12 +29,12 @@ Sigue estos pasos dentro de `notebooks/01-regresion-lineal.ipynb`:
   $$b = b - \alpha \cdot db$$
   *(El algoritmo descubrió por sí solo $w = 3.27$ y $b = 22.87$, bajando el error MSE de $1750.74$ a $2.76$).*
 
-### Fase 4: Visualizar cómo Aprende la Máquina
-- [ ] **Gráfico 1 (Curva de Aprendizaje):** Graficar cómo cae el error **MSE** época tras época hasta estabilizarse cerca de cero (`reports/figures/02_curva_error_mse.png`).
-- [ ] **Gráfico 2 (Ajuste de la Recta):** Pintar los puntos reales junto con la recta final aprendida por nuestro algoritmo (`reports/figures/03_recta_ajustada.png`).
+### Fase 4: Visualizar cómo Aprende la Máquina ✅
+- [x] **Gráfico 1 (Curva de Aprendizaje):** Graficar cómo cae el error **MSE** época tras época hasta estabilizarse en $2.76$ (`reports/figures/02_curva_error_mse.png`).
+- [x] **Gráfico 2 (Ajuste de la Recta):** Pintar los puntos reales junto con la recta final aprendida por nuestro algoritmo (`reports/figures/03_recta_ajustada.png`).
 
-### Fase 5: Crear nuestra propia Clase `LinearRegressionFromScratch`
-- [ ] Empaquetar todo nuestro código matemático dentro de una clase limpia de Python con la misma estructura profesional que usa `scikit-learn`:
+### Fase 5: Crear nuestra propia Clase `LinearRegressionFromScratch` ✅
+- [x] Empaquetar todo nuestro código matemático dentro de una clase limpia de Python con la misma estructura profesional que usa `scikit-learn`:
   * `modelo.fit(X, y)` $\rightarrow$ Entrena la recta con Descenso del Gradiente.
   * `modelo.predict(X)` $\rightarrow$ Predice valores nuevos con los $w$ y $b$ aprendidos.
 
@@ -68,15 +68,15 @@ Imagina que estás en una montaña a oscuras y quieres bajar al valle más profu
 
 ## 2. Análisis Exploratorio de los Datos
 
-> *(Pendiente de insertar gráfico tras la Fase 1: `![Scatter Datos](reports/figures/01_scatter_datos.png)`)*
+![Scatter Datos](reports/figures/01_scatter_datos.png)
 
 ---
 
 ## 3. Evolución del Aprendizaje (Curva de Error y Recta Final)
 
-> *(Pendiente de insertar gráficos tras la Fase 4:*
-> *`![Curva MSE](reports/figures/02_curva_error_mse.png)`*
-> *`![Recta Ajustada](reports/figures/03_recta_ajustada.png)`)*
+![Curva MSE](reports/figures/02_curva_error_mse.png)
+
+![Recta Ajustada](reports/figures/03_recta_ajustada.png)
 
 ---
 
