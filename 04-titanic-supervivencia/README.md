@@ -31,10 +31,10 @@ En lugar de limitarnos a las columnas que vienen en el archivo original, fabrica
 
 Sigue estos pasos dentro de `notebooks/01-titanic.ipynb`:
 
-### Fase 1: Cargar el Dataset y Hacer la "Autopsia de Datos Sucios"
-- [ ] Cargar el dataset de los **891 pasajeros** (`data/titanic.csv`) y ver las primeras filas.
-- [ ] Inspeccionar los tipos de datos (`df.info()`) para identificar qué columnas son texto (`object`) y cuáles son números.
-- [ ] Contar cuántos datos vacíos (`NaN`) tiene cada columna con `df.isnull().sum()`.
+### Fase 1: Cargar el Dataset y Hacer la "Autopsia de Datos Sucios" ✅
+- [x] Cargar el dataset de los **891 pasajeros** (`data/titanic.csv`) y ver las primeras filas.
+- [x] Inspeccionar los tipos de datos (`df.info()`) para identificar qué columnas son texto (`object`) y cuáles son números.
+- [x] Contar cuántos datos vacíos (`NaN`) tiene cada columna con `df.isnull().sum()` (`Age: 177`, `Cabin: 687`, `Embarked: 2`).
 
 ### Fase 2: Análisis Exploratorio Socioeconómico (EDA Visual)
 - [ ] **Gráfico 1 (*"Mujeres y niños primero"*):** Comparar el porcentaje de supervivencia por **Sexo (`Sex`)** y por **Clase del billete (`Pclass`: 1ª, 2ª y 3ª)**, y guardarlo en `reports/figures/01_supervivencia_sexo_clase.png`.
